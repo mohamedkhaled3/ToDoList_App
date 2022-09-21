@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ToDoCard extends StatelessWidget {
-  const ToDoCard({Key? key}) : super(key: key);
+  
 
+  String text  ; 
+  ToDoCard({required this.text});
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
@@ -18,7 +20,7 @@ class ToDoCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Publish Videos ",
+                text,   //
                 style: TextStyle(fontSize: 22, color: Colors.white),
               ),
 
