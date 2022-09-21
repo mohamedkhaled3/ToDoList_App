@@ -27,8 +27,11 @@ class Handle extends StatefulWidget {
 class Task {
   String title;
   bool stutus;
-  
-  Task({required this.title, required this.stutus,});
+
+  Task({
+    required this.title,
+    required this.stutus,
+  });
 }
 
 List all_tasks = [
@@ -45,6 +48,44 @@ class _HandleState extends State<Handle> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                  padding: EdgeInsets.all(22),
+                  // height: double.infinity,
+                  color: Colors.amber[100],    
+                  child: Column(    
+                    mainAxisAlignment: MainAxisAlignment.center,      
+                    children: [
+                  
+                      TextField(
+                        maxLength: 20,
+                        decoration: InputDecoration(hintText: "write new todo"),
+                      ),
+                      
+                      SizedBox(height: 10,),
+
+                      TextButton(
+                        onPressed: (){  Navigator.pop(context); },//Return to the first screen
+                        child: Text("Add",style: TextStyle(fontSize: 22),),
+
+                      ),
+
+
+                    ],
+                  ),
+                );
+              },
+              // to make second screen full screen 
+              isScrollControlled: true
+              );
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.redAccent,
+      ),
       backgroundColor: Color.fromRGBO(58, 66, 86, 0.7),
       appBar: AppBar(
         elevation: 0, // shadow
@@ -63,7 +104,6 @@ class _HandleState extends State<Handle> {
             ...all_tasks.map((item) => ToDoCard(
                   text: item.title,
                   doOrNot: item.stutus,
-                
                 ))
           ],
         ),
