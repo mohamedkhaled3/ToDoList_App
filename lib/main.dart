@@ -27,15 +27,15 @@ class Handle extends StatefulWidget {
 class Task {
   String title;
   bool stutus;
-  Task({required this.title, required this.stutus});
+  
+  Task({required this.title, required this.stutus,});
 }
 
 List all_tasks = [
-  Task(title: "study" , stutus: true),
+  Task(title: "study", stutus: true),
   Task(title: "launch", stutus: true),
   Task(title: "go gym", stutus: false),
   Task(title: "go out", stutus: false),
-  
 ];
 
 class _HandleState extends State<Handle> {
@@ -59,8 +59,12 @@ class _HandleState extends State<Handle> {
         width: double.infinity,
         child: Column(
           children: [
-    ...all_tasks.map((item) => ToDoCard(text: item.title ) )
-          
+            // text is var.
+            ...all_tasks.map((item) => ToDoCard(
+                  text: item.title,
+                  doOrNot: item.stutus,
+                
+                ))
           ],
         ),
       ),

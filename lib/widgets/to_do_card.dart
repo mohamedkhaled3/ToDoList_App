@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ToDoCard extends StatelessWidget {
-  
-
-  String text  ; 
-  ToDoCard({required this.text});
+  String text;
+  bool doOrNot;
+  ToDoCard({required this.text , required this.doOrNot ,});
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
@@ -20,15 +19,18 @@ class ToDoCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                text,   //
+                text, //
                 style: TextStyle(fontSize: 22, color: Colors.white),
               ),
 
               // SizedBox( width: 100, ),
 
               Icon(
-                Icons.close,
-                color: Colors.red,
+               // Icons.close
+              //  color: Colors.red,
+                //condition ? If-True : If-False
+                doOrNot ? Icons.check : Icons.close,       
+                color: doOrNot ? Colors.green[600]: Colors.red,
                 size: 27,
               ),
             ],
