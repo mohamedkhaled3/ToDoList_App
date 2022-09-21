@@ -34,15 +34,25 @@ class Task {
   });
 }
 
-List all_tasks = [
-  Task(title: "study", stutus: true),
-  Task(title: "launch", stutus: true),
-  Task(title: "go gym", stutus: false),
-  Task(title: "go out", stutus: false),
-];
-
 class _HandleState extends State<Handle> {
   //////////////////////////////////////////////dart
+  final myControler = TextEditingController();
+
+  List all_tasks = [
+    Task(title: "study", stutus: true),
+    Task(title: "launch", stutus: true),
+    Task(title: "go gym", stutus: false),
+    Task(title: "go out", stutus: false),
+  ];
+  
+
+  void addNewTask() {
+    setState(() {
+      all_tasks.add(
+        Task(title: myControler.text, stutus: false),
+      );
+    });
+  }
 
   ///////////////////////////////////////////////flutter
   @override
@@ -55,33 +65,34 @@ class _HandleState extends State<Handle> {
               builder: (BuildContext context) {
                 return Container(
                   padding: EdgeInsets.all(22),
-                  // height: double.infinity,
-                  color: Colors.amber[100],    
-                  child: Column(    
-                    mainAxisAlignment: MainAxisAlignment.center,      
+                  color: Colors.amber[100],
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  
                       TextField(
+                        controller: myControler,  
                         maxLength: 20,
                         decoration: InputDecoration(hintText: "write new todo"),
                       ),
-                      
-                      SizedBox(height: 10,),
-
-                      TextButton(
-                        onPressed: (){  Navigator.pop(context); },//Return to the first screen
-                        child: Text("Add",style: TextStyle(fontSize: 22),),
-
+                      SizedBox(
+                        height: 10,
                       ),
-
-
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          addNewTask(); //
+                        }, //Return to the first screen
+                        child: Text(
+                          "Add",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ),
                     ],
                   ),
                 );
               },
-              // to make second screen full screen 
-              isScrollControlled: true
-              );
+              // to make second screen full screen
+              isScrollControlled: true);
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.redAccent,
