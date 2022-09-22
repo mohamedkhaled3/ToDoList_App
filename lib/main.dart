@@ -60,39 +60,46 @@ class _HandleState extends State<Handle> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showModalBottomSheet(
+          showDialog(
               context: context,
               builder: (BuildContext context) {
-                return Container(
-                  padding: EdgeInsets.all(22),
-                  color: Colors.amber[100],
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextField(
-                        controller: myControler,  
-                        maxLength: 20,
-                        decoration: InputDecoration(hintText: "write new todo"),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          addNewTask(); //
-                        }, //Return to the first screen
-                        child: Text(
-                          "Add",
-                          style: TextStyle(fontSize: 22),
+                return Dialog(
+                  backgroundColor: Colors.white,
+                  shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)) ,
+                  child: Container(
+            // decoration: BoxDecoration(   error 
+            // borderRadius: BorderRadius.circular(22) ),
+                    height: 200,
+                    padding: EdgeInsets.all(22),
+                    // color: Colors.amber[100], dont use
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextField(
+                          controller: myControler,  
+                          maxLength: 20,
+                          decoration: InputDecoration(hintText: "write new todo"),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            addNewTask(); //
+                          }, //Return to the first screen
+                          child: Text(
+                            "Add",
+                            style: TextStyle(fontSize: 22),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
               // to make second screen full screen
-              isScrollControlled: true);
+              );
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.redAccent,
