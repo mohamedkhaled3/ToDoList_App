@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ToDoCard extends StatelessWidget {
+  
   String text;
   bool doOrNot;
   ToDoCard({required this.text , required this.doOrNot ,});
+
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
