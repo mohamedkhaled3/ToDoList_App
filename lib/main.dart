@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/widgets/counter.dart';
-import 'package:test_flutter/widgets/to_do_card.dart';
+import 'package:test_flutter/widgets/toDoCard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -66,8 +66,6 @@ class _HandleState extends State<Handle> {
     return completeTasks;
   }
 
-
-
   ///////////////////////////////////////////////flutter
   @override
   Widget build(BuildContext context) {
@@ -129,22 +127,29 @@ class _HandleState extends State<Handle> {
               color: Colors.white, fontSize: 33, fontWeight: FontWeight.bold),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          child: Column(
-            children: [
-              ToDoCounter(
-                  calculateCompleteTasksFunction: calculateCompleteTasks(),
-                  all_tasks_length: all_tasks.length,
-                  ),
-              // text is var.
-              ...all_tasks.map((item) => ToDoCard(
-                    text: item.title,
-                    doOrNot: item.stutus,
-                  ))
-            ],
-          ),
+      body: Container(
+        width: double.infinity,
+        child: Column(
+          children: [
+            ToDoCounter(
+              calculateCompleteTasksFunction: calculateCompleteTasks(),
+              all_tasks_length: all_tasks.length,
+            ),
+            // text is var.
+            Container(
+              height: 400,
+              color: Color.fromARGB(255, 53, 52, 76),
+              child: ListView.builder(
+                  itemCount: all_tasks.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ToDoCard(
+                      text: all_tasks[index].title,
+                      doOrNot: all_tasks[index].stutus,
+                      // all_tasks_length : all_tasks.length ,
+                    );
+                  }),
+            )
+          ],
         ),
       ),
     );
