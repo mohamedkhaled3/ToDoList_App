@@ -3,45 +3,73 @@ import 'package:flutter/material.dart';
 class ToDoCard extends StatelessWidget {
   String text;
   bool doOrNot;
+  Function changeState;
+  int index;
+  Function delete;
   
+
   ToDoCard({
     required this.text,
     required this.doOrNot,
+    required this.changeState,
+    required this.index,
+    required this.delete,
   });
 
   @override
   Widget build(BuildContext context) {
-    return  FractionallySizedBox(
-          widthFactor: 0.9,
-          child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(22),
-                color: Colors.amber,
-              ),
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.all(22),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    text, //
-                    style: TextStyle(fontSize: 22, color: Colors.white),
-                  ),
+    return GestureDetector(
+      onTap: () {
+        changeState(index);
+      },
+      child: FractionallySizedBox(
+        widthFactor: 0.9,
+        child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(22),
+              color: Color.fromARGB(255, 88, 125, 132),
+            ),
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.all(22),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  text, //
+                  style: TextStyle(fontSize: 22, color: Colors.white),
+                ),
 
-                  // SizedBox( width: 100, ),
+                // SizedBox( width: 100, ),
 
-                  Icon(
-                    // Icons.close
-                    //  color: Colors.red,
-                    //condition ? If-True : If-False
-                    doOrNot ? Icons.check : Icons.close,
-                    color: doOrNot ? Colors.green[600] : Colors.red,
-                    size: 27,
-                  ),
-                ],
-              )),
-        );
-
+                Row(
+                  children: [
+                    Icon(
+                      // Icons.close
+                      //  color: Colors.red,
+                      //condition ? If-True : If-False
+                      doOrNot ? Icons.check : Icons.close,
+                      color: doOrNot
+                          ? Color.fromARGB(255, 32, 227, 42)
+                          : Colors.red,
+                      size: 27,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        delete(index);
+                      },
+                      icon: Icon(Icons.delete),
+                      iconSize: 27,
+                      color: Color.fromARGB(255, 248, 78, 66),
+                    ),
+                  ],
+                ),
+              ],
+            )),
+      ),
+    );
   }
 }
 

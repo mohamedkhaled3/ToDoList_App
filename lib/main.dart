@@ -27,11 +27,11 @@ class Handle extends StatefulWidget {
 
 class Task {
   String title;
-  bool stutus;
+  bool status;
 
   Task({
     required this.title,
-    required this.stutus,
+    required this.status,
   });
 }
 
@@ -40,16 +40,33 @@ class _HandleState extends State<Handle> {
   final myControler = TextEditingController();
 
   List all_tasks = [
-    Task(title: "study", stutus: true),
-    Task(title: "launch", stutus: true),
-    Task(title: "go gym", stutus: true),
-    Task(title: "go out", stutus: true),
+    Task(title: "study", status: true),
+    Task(title: "launch", status: true),
+    Task(title: "go gym", status: true),
+    Task(title: "go out", status: true),
   ];
+  deleteAll() {
+    setState(() {
+      all_tasks.removeRange(0, all_tasks.length);
+    });
+  }
+
+  delete(int index) {
+    setState(() {
+      all_tasks.remove(all_tasks[index]);
+    });
+  }
+
+  changeState(int index) {
+    setState(() {
+      all_tasks[index].status = !all_tasks[index].status;
+    });
+  }
 
   void addNewTask() {
     setState(() {
       all_tasks.add(
-        Task(title: myControler.text, stutus: false),
+        Task(title: myControler.text, status: false),
       );
     });
   }
@@ -58,18 +75,19 @@ class _HandleState extends State<Handle> {
     int completeTasks = 0;
 
     all_tasks.forEach((item) {
-      if (item.stutus) {
+      if (item.status) {
         completeTasks++;
       }
     });
 
     return completeTasks;
   }
+
   ///////////////////////////////////////////////flutter
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(58, 66, 86, 0.7),
+      backgroundColor: Color.fromARGB(174, 73, 79, 94),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
@@ -118,6 +136,16 @@ class _HandleState extends State<Handle> {
         backgroundColor: Colors.redAccent,
       ),
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              deleteAll();
+            },
+            icon: Icon(Icons.delete_forever),
+            iconSize: 37,
+            color: Color.fromARGB(255, 248, 78, 66),
+          )
+        ],
         elevation: 0, // shadow
         backgroundColor: Color.fromRGBO(58, 66, 86, 1),
         title: Text(
@@ -131,15 +159,26 @@ class _HandleState extends State<Handle> {
         child: Column(
           children: [
             ToDoCounter(
-                calculateCompleteTasksFunction: calculateCompleteTasks(),
-                all_tasks_length: all_tasks.length,
-                ),
+              calculateCompleteTasksFunction: calculateCompleteTasks(),
+              all_tasks_length: all_tasks.length,
+            ),
             // text is var.
-            ...all_tasks.map((item) => ToDoCard(
-                  text: item.title,
-                  doOrNot: item.stutus,
-                  // all_tasks_length : all_tasks.length ,
-                ))
+            Container(
+              height: 400,
+              color: Color.fromARGB(175, 174, 191, 236),
+              child: ListView.builder(
+                  itemCount: all_tasks.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ToDoCard(
+                      text: all_tasks[index].title,
+                      doOrNot: all_tasks[index].status,
+                      changeState: changeState,
+                      index: index,
+                      delete: delete,
+                      // all_tasks_length : all_tasks.length ,
+                    );
+                  }),
+            )
           ],
         ),
       ),
@@ -150,6 +189,6 @@ class _HandleState extends State<Handle> {
             // old
             // ...all_tasks.map((item) => ToDoCard(
             //       text: item.title,
-            //       doOrNot: item.stutus,
+            //       doOrNot: item.status,
             //       // all_tasks_length : all_tasks.length ,
             //     )
