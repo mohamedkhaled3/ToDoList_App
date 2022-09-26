@@ -24,6 +24,7 @@ class ToDoCard extends StatelessWidget {
       },
       child: FractionallySizedBox(
         widthFactor: 0.9,
+   
         child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
@@ -31,6 +32,7 @@ class ToDoCard extends StatelessWidget {
             ),
             padding: EdgeInsets.all(10),
             margin: EdgeInsets.all(22),
+    
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

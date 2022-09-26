@@ -25,6 +25,7 @@ class Handle extends StatefulWidget {
   State<Handle> createState() => _HandleState();
 }
 
+// class for task(todo-card)
 class Task {
   String title;
   bool status;
@@ -37,32 +38,40 @@ class Task {
 
 class _HandleState extends State<Handle> {
   //////////////////////////////////////////////dart
+
+  // to create controller to get the text inside the texfield in the dialog widget
   final myControler = TextEditingController();
 
+  // list of todos
   List all_tasks = [
     Task(title: "study", status: true),
     Task(title: "launch", status: true),
     Task(title: "go gym", status: true),
     Task(title: "go out", status: true),
   ];
+
+  //to remove all todos when click on the "delete_icon" in appBar
   deleteAll() {
     setState(() {
       all_tasks.removeRange(0, all_tasks.length);
     });
   }
 
+  //to remove todo when click on the "delete_icon"
   delete(int index) {
     setState(() {
       all_tasks.remove(all_tasks[index]);
     });
   }
 
+  //to change state of todo ( completed (right) or not completed (wrong)) when click on the todo
   changeState(int index) {
     setState(() {
       all_tasks[index].status = !all_tasks[index].status;
     });
   }
 
+  //to add new todo when clicking on "ADD" in the dialog widget //which in floatingActionButton
   void addNewTask() {
     setState(() {
       all_tasks.add(
@@ -71,6 +80,7 @@ class _HandleState extends State<Handle> {
     });
   }
 
+// to calculate only completed todos 
   int calculateCompleteTasks() {
     int completeTasks = 0;
 
@@ -170,6 +180,7 @@ class _HandleState extends State<Handle> {
                   itemCount: all_tasks.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ToDoCard(
+// I will pass all these information when create the Todecard() widget in "toDoCard.dart" 
                       text: all_tasks[index].title,
                       doOrNot: all_tasks[index].status,
                       changeState: changeState,
@@ -186,9 +197,9 @@ class _HandleState extends State<Handle> {
   }
 }
 
-            // old
-            // ...all_tasks.map((item) => ToDoCard(
-            //       text: item.title,
-            //       doOrNot: item.status,
-            //       // all_tasks_length : all_tasks.length ,
-            //     )
+// old
+// ...all_tasks.map((item) => ToDoCard(
+//       text: item.title,
+//       doOrNot: item.status,
+//       // all_tasks_length : all_tasks.length ,
+//     )
