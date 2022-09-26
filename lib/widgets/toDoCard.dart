@@ -36,7 +36,14 @@ class ToDoCard extends StatelessWidget {
               children: [
                 Text(
                   text, //
-                  style: TextStyle(fontSize: 22, color: Colors.white),
+                  style: TextStyle(
+                  fontSize: 22,        
+                  decoration: doOrNot ? TextDecoration.lineThrough:TextDecoration.none ,
+                  color: doOrNot? Color.fromARGB(132, 0, 0, 0): Colors.white,
+                          
+                          
+                  
+                  ),
                 ),
 
                 // SizedBox( width: 100, ),
