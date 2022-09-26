@@ -80,7 +80,7 @@ class _HandleState extends State<Handle> {
     });
   }
 
-// to calculate only completed todos 
+// to calculate only completed todos
   int calculateCompleteTasks() {
     int completeTasks = 0;
 
@@ -145,6 +145,7 @@ class _HandleState extends State<Handle> {
         child: Icon(Icons.add),
         backgroundColor: Colors.redAccent,
       ),
+    
       appBar: AppBar(
         actions: [
           IconButton(
@@ -159,11 +160,12 @@ class _HandleState extends State<Handle> {
         elevation: 0, // shadow
         backgroundColor: Color.fromRGBO(58, 66, 86, 1),
         title: Text(
-          "TO DO APP",
+          "TO DO APP For Mohamed Khaled",
           style: TextStyle(
               color: Colors.white, fontSize: 33, fontWeight: FontWeight.bold),
         ),
       ),
+    
       body: Container(
         width: double.infinity,
         child: Column(
@@ -180,7 +182,7 @@ class _HandleState extends State<Handle> {
                   itemCount: all_tasks.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ToDoCard(
-// I will pass all these information when create the Todecard() widget in "toDoCard.dart" 
+// I will pass all these information when create the Todecard() widget in "toDoCard.dart"
                       text: all_tasks[index].title,
                       doOrNot: all_tasks[index].status,
                       changeState: changeState,

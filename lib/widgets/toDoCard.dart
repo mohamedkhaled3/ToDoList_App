@@ -6,7 +6,6 @@ class ToDoCard extends StatelessWidget {
   Function changeState;
   int index;
   Function delete;
-  
 
   ToDoCard({
     required this.text,
@@ -24,7 +23,6 @@ class ToDoCard extends StatelessWidget {
       },
       child: FractionallySizedBox(
         widthFactor: 0.9,
-   
         child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
@@ -32,19 +30,18 @@ class ToDoCard extends StatelessWidget {
             ),
             padding: EdgeInsets.all(10),
             margin: EdgeInsets.all(22),
-    
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   text, //
                   style: TextStyle(
-                  fontSize: 22,        
-                  decoration: doOrNot ? TextDecoration.lineThrough:TextDecoration.none ,
-                  color: doOrNot? Color.fromARGB(132, 0, 0, 0): Colors.white,
-                          
-                          
-                  
+                    fontSize: 22,
+                    decoration: doOrNot
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
+                    color:
+                        doOrNot ? Color.fromARGB(132, 0, 0, 0) : Colors.white,
                   ),
                 ),
 
