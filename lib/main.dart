@@ -65,7 +65,6 @@ class _HandleState extends State<Handle> {
 
     return completeTasks;
   }
-
   ///////////////////////////////////////////////flutter
   @override
   Widget build(BuildContext context) {
@@ -132,26 +131,25 @@ class _HandleState extends State<Handle> {
         child: Column(
           children: [
             ToDoCounter(
-              calculateCompleteTasksFunction: calculateCompleteTasks(),
-              all_tasks_length: all_tasks.length,
-            ),
+                calculateCompleteTasksFunction: calculateCompleteTasks(),
+                all_tasks_length: all_tasks.length,
+                ),
             // text is var.
-            Container(
-              height: 400,
-              color: Color.fromARGB(255, 53, 52, 76),
-              child: ListView.builder(
-                  itemCount: all_tasks.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ToDoCard(
-                      text: all_tasks[index].title,
-                      doOrNot: all_tasks[index].stutus,
-                      // all_tasks_length : all_tasks.length ,
-                    );
-                  }),
-            )
+            ...all_tasks.map((item) => ToDoCard(
+                  text: item.title,
+                  doOrNot: item.stutus,
+                  // all_tasks_length : all_tasks.length ,
+                ))
           ],
         ),
       ),
     );
   }
 }
+
+            // old
+            // ...all_tasks.map((item) => ToDoCard(
+            //       text: item.title,
+            //       doOrNot: item.stutus,
+            //       // all_tasks_length : all_tasks.length ,
+            //     )
